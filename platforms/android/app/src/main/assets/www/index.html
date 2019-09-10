@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="3;url=main.html" />
+<style>
+div.shadow {
+    position:absolute;
+    max-width:45%;
+    max-height:45%;
+    top:50%;
+    left:50%;
+    overflow:visible;
+}
+img.logo {
+    position:relative;
+    max-width:100%;
+    max-height:100%;
+    margin-top:-50%;
+    margin-left:-50%;
+}
+
+div.shadows {
+    position:absolute;
+    max-width:45%;
+    max-height:45%;
+    top:80%;
+    left:50%;
+    overflow:visible;
+}
+img.logos {
+    position:relative;
+    max-width:100%;
+    max-height:100%;
+    margin-top:-50%;
+    margin-left:-50%;
+}
+</style>
+</head>
+<body style="background-color: #e5eff1;">
+<div class="shadow"><img class="logo" src="images/login.png" /></div>
+<div class="shadows"><img class="logos" src="load.gif" /></div>
+
+
+<script>
+
+		 
+		 document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady(){
+    document.addEventListener("backbutton", function(e){
+       if($.mobile.activePage.is('#homepage')){
+           e.preventDefault();
+           navigator.app.exitApp();
+       }
+       else {
+           navigator.app.backHistory()
+       }
+    }, false);
+}
+	</script>
+</body>
+</html>

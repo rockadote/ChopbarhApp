@@ -1,0 +1,24 @@
+var CAV = CAV || {};
+CAV.Settings = CAV.Settings || {};
+CAV.Settings.AuthenticateUrl = "https://dmobile.diamondbank.com/CAVWs/CAVService.asmx/AuthenticateAgent";
+CAV.Settings.sessionTimeout = 3600000;
+CAV.Settings.TrendsUrl = "https://dmobile.diamondbank.com/CAVWs/CAVService.asmx/FetchJobTrends2";
+CAV.Settings.JobsUrl = "https://dmobile.diamondbank.com/CAVWs/CAVService.asmx/FetchJobs";
+CAV.Settings.JobDetailUrl = "https://dmobile.diamondbank.com/CAVWs/CAVService.asmx/FetchJobByReference";
+CAV.Settings.PasswordChangeUrl = "https://dmobile.diamondbank.com/CAVWs/CAVService.asmx/UpdateAgentPassword";
+CAV.Settings.PasswordResetUrl = "https://dmobile.diamondbank.com/CAVWs/CAVService.asmx/ResetAgentPassword";
+CAV.Settings.FeedbackUrl = "https://dmobile.diamondbank.com/CAVWs/CAVService.asmx/SubmitAgentFeedback";
+CAV.Settings.ReportUrl = "https://dmobile.diamondbank.com/CAVWs/CAVService.asmx/FetchReport";
+CAV.Settings.ReportDetailUrl = "https://dmobile.diamondbank.com/CAVWs/CAVService.asmx/FetchReportByReference";
+CAV.Settings.PicUploadUrl = "https://dmobile.diamondbank.com/CAVWs/CAVService.asmx/UploadPictures";
+
+//var CAV = CAV || {};
+//CAV.Settings = CAV.Settings || {};
+//CAV.Settings.AuthenticateUrl = "http://10.16.5.128/CAVWs/CAVService.asmx/AuthenticateAgent";
+//CAV.Settings.sessionTimeoutInMSec = 1800000;
+//CAV.Settings.TrendsUrl = "http://10.16.5.128/CAVWs/CAVService.asmx/FetchJobTrends2";
+//CAV.Settings.JobsUrl = "http://10.16.5.128/CAVWs/CAVService.asmx/FetchJobs";
+//CAV.Settings.JobDetailUrl = "http://10.16.5.128/CAVWs/CAVService.asmx/FetchJobByReference";
+//CAV.Settings.PasswordChangeUrl = "http://10.16.5.128/CAVWs/CAVService.asmx/UpdateAgentPassword";
+//CAV.Settings.PasswordResetUrl = "http://10.16.5.128/CAVWs/CAVService.asmx/ResetAgentPassword";
+//CAV.Settings.FeedbackUrl = "http://10.16.5.128/CAVWs/CAVService.asmx/SubmitAgentFeedback";

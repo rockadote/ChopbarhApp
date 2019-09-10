@@ -1,0 +1,711 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CAV Mobile</title>
+<!--<meta name="viewport" content="initial-scale=1.0">-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="white">
+<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/animate.css" />
+<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css">
+<!--<link rel="stylesheet" type="text/css" href="www/css/DateTimePicker.css" />
+<script src="www/js/jquery-1.11.3.min.js"></script>
+<script src="www/js/jquery.mobile-1.4.5.min.js"></script>-->
+<script type="text/javascript" src="js/__jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/___jquery.mobile-1.3.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.blockUI.js"></script>
+<!--<script type="text/javascript" src=".././js/cordova.js"></script>-->
+<script src="phonegap.js"></script>
+<script type="text/javascript" src="js/canvasjs.min.js"></script>
+<script type="text/javascript" src="js/jquery.quick.pagination.min.js"></script>
+<script type='text/javascript' src="js/sweetalert.min.js"></script>
+<script type='text/javascript' src="js/jquery.datetimepicker.js"></script>
+<!--<script type="text/javascript" src="js/DateTimePicker.js"></script>-->
+<script type="text/javascript" src="js/settings.js" ></script>
+<script type="text/javascript" src="js/signin-controller.js" ></script>
+<script type="text/javascript" src="js/session.js" ></script>
+<script type="text/javascript" src="js/index.js" ></script>
+
+<style>
+	.error{
+			display: none;
+			margin-left: 10px;
+		}		
+		
+		.error_show{
+			color: red;
+			margin-left: 10px;
+		}
+		
+		input.invalid, textarea.invalid{
+			border: 2px solid red;
+		}
+		
+		input.valid, textarea.valid{
+			border: 2px solid green;
+		}
+</style>
+<script type="text/javascript" charset="utf-8">
+		
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady(){
+    document.addEventListener("backbutton", function(e){
+       if($.mobile.activePage.is('#homepage')){
+           e.preventDefault();
+           navigator.app.exitApp();
+       }
+       else {
+           navigator.app.backHistory()
+       }
+    }, false);
+}
+	
+</script>
+
+</head>
+
+<body onload="onLoad()">
+ <div id="container">
+<!--<div data-role="page" data-theme="b" id="page-login" data-cache="never" data-dom-cache="false">
+           
+    <div data-role="content" class="ui-body ui-body-d ui-corner-all">
+    <div>
+    <div class="ui-grid-a" style="text-align: center; margin-left:0 auto; margin-right:0 auto"> <a> <img src=".././images/login.png" style="width: 50%; margin:0" /> </a> 
+    </div>
+  
+  <form id="login" method="post" action="">
+          <div data-role="controlgroup" class="ui-corner-all">
+        	<p>
+              <span for="name" class="lbl">User ID</span>
+              <input class="input-medium" type="text" value="ookuneye@diamondbank.com" name="name" id="login_name" />
+              <span class="error">This field is required</span>
+            </p>
+        	<p>
+              <span for="name" class="lbl">Password</span>
+              <input class="input-medium" type="password" value="password" name="password" id="login_password" />
+              <span class="error">This field is required</span>
+            </p>
+      	  </div> 
+      
+      <div data-role="controlgroup">
+          <div style="overflow:auto">
+                    <div data-role="controlgroup" style="float:left;">
+              <label for="checkbox1" >Remember Me?</label>
+              <input type="checkbox" value="1" name="checkbox1" id="checkbox1"/>
+              </div>      
+            </div>
+      		</div>
+      
+          <div data-role="tabs">
+
+        <p style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto" class="clearboth">
+              <input align="center" class="button" data-theme="a" name="submit" id="btLogin" type="submit" value="Login" />
+            
+      </div>           
+          <div data-role="controlgroup">
+          <div style="overflow:auto">
+              <a data-role="controlgroup" id="forgotp" style="text-align:lrft; background:none; border:none; text-decoration:none; font-size:11px" href="#password-reset">FORGOT PASSWORD</a>
+            </div>
+      		</div>
+      </form>
+        </div>
+  </div>
+      
+      <!--<div data-role="footer" data-position="fixed"> 
+    <h4>© Diamond Bank</h4>
+    <a href="#" id="btExit" data-icon="info" class="ui-btn-right" data-transition="flip" data-theme="a">Quit</a> 
+    </div>
+    </div>-->
+    
+    
+    <!--Beginning of Main page-->
+    <div data-role="page" data-theme="d" id="home" data-cache="never" data-dom-cache="false">
+      <div data-role="panel" data-theme="a" id="Menu" data-position="left" data-display="overlay" data-dismissible="true" data-animate="true">
+    <ul data-role="listview" data-inset="true">
+          <li data-role="list-divider">Menu</li>
+          <!--<li><a href="#home" data-transition="flip">Home</a> </li>-->
+          <li><a href="#jobs" data-transition="flip">Pending Jobs</a> </li>
+          <li><a href="#report" data-transition="flip">Submitted Jobs</a></li>
+          <li><a href="#" id="lnkLogout" data-transition="flip">Logout</a> </li>
+          <!--<li><a href="#preset">Password Reset</a> </li>
+          <li><a href="#help">Help</a> </li>-->
+        </ul>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav.png" style="width: 40%" /> </a> </div>
+  </div>
+      <div data-role="header"> <a href="#Menu" data-icon="bars" data-iconpos="notext">Menu</a>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto">  <img src="images/cav_header1.png" style="width: 50%; margin:0">  </div>
+    <!--<a href="index.html" data-icon="plus" data-iconpos="notext">LogOut</a>-->
+    </div>
+      <!-- /header -->
+      
+      <div data-role="content" class="scrollable">
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/allpagepix.png" style="width: 100%; margin:0" /> </a> </div>
+    <div class="ui-bar ui-bar-a ui-corner-all" style="text-align: center;">
+          <h3 style="width:180px; font-size:17px; text-align:center" id="lblName"></h3>
+          <p  style="font-size:15px; text-align:center" id="pCompany"><br/></p>
+          <!--<span style="color:#000; font-size:11px;">Total Jobs Submitted: 156</span>-->
+        </div>
+    <!--<br/>-->
+    <a href="#" data-role="button" id="btJobs" class="ui-btn-cornerall" data-transition="flip" data-theme="b">
+          <h2 style: align="center" class="animated infinite pulse" id="lblPendingJobs"></h2>    
+        </a>
+    
+    <div>
+          <div id="chartContainer" align="center" style="height: 200px; width: 100%; text-align:center"> </div>
+        </div>
+    <!--<div style="text-align:center;" div data-role="footer" data-position="fixed" data-theme="c">
+          <div class="ui-body ui-body-a ui-corner-all">
+        <label for="search-2">Check Job Status</label>
+        <input type="search" data-theme="a" name="search-2" placeholder="Enter Transaction Reference" id="search-2" value="">
+        <a href="#anylink" data-role="button" data-inline="true" data-mini="true">Check</a> </div>
+        </div>-->
+  </div>
+      <div data-role="footer" data-position="fixed"> 
+    <a href="#" id="btExit" data-icon="arrow-l" class="ui-btn-left" data-transition="flip" data-theme="a">Back</a> 
+    <h4>© Diamond Bank</h4>
+    </div>
+    </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+    <!-- Beginning of jobs page -->
+    <div data-role="page" data-theme="d" id="jobs" data-cache="never" data-dom-cache="false">
+      <div data-role="panel" data-theme="a" id="Menu" data-position="left" data-display="overlay" data-dismissible="true" data-animate="true">
+    <ul data-role="listview" data-inset="true">
+          <li data-role="list-divider">Menu</li>
+          <li><a href="#home" data-transition="flip">Home</a> </li>
+          <li><a href="#jobs" data-transition="flip">Pending Jobs</a> </li>
+          <li><a href="#report" data-transition="flip">Submitted Jobs</a></li>
+          <li><a href="#" id="lnkLogout" data-transition="flip">Logout</a> </li>
+        </ul>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav.png" style="width: 40%" /> </a> </div>
+  </div>
+      <!--------/////////DIVIDER///////////----->
+     <div data-role="header"> <a href="#Menu" data-icon="bars" data-iconpos="notext">Menu</a>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav_header1.png" style="width: 50%; margin:0" /> </a> </div>
+  </div>
+    
+      <div data-role="content" class="scrollable">
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/allpagepix.png" style="width: 100%; margin:0" /> </a> </div>
+  
+        <h3 class="ui-bar ui-bar-a ui-corner-all" align="center">PENDING JOBS</h3>
+        <!--<br/>-->
+        <div data-role="tabs">
+              <ul data-role="listview" data-filter="false" data-inset="true" class="paging" id="jobsList"></ul>
+            </div>
+      </div>
+    <div data-role="footer" data-position="fixed"> 
+    <a href="#" id="btExit" data-icon="arrow-l" class="ui-btn-left" data-transition="flip" data-theme="a">Back</a> 
+    <h4>© Diamond Bank</h4>
+    </div>
+    </div>
+    
+    <!-- Beginning of feedback page-->
+        <div data-role="page" data-theme="d" id="feedback" data-cache="never" data-dom-cache="false">
+      <div data-role="panel" data-theme="a" id="Menu" data-position="left" data-display="overlay" data-dismissible="true" data-animate="true">
+    <ul data-role="listview" data-inset="true">
+          <li data-role="list-divider">Menu</li>
+          <li><a href="#home" data-transition="flip">Home</a> </li>
+          <li><a href="#jobs" data-transition="flip">Pending Jobs</a> </li>
+          <li><a href="#report" data-transition="flip">Submitted Jobs</a></li>
+          <li><a href="#" id="lnkLogout" data-transition="flip">Logout</a> </li>
+        </ul>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav.png" style="width: 40%" /> </a> </div>
+  </div>
+      <!--------/////////DIVIDER///////////----->
+     <div data-role="header"> <a href="#Menu" data-icon="bars" data-iconpos="notext">Menu</a>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav_header1.png" style="width: 50%; margin:0" /> </a> </div>
+  </div>
+    
+      <div data-role="content" class="scrollable">
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/allpagepix.png" style="width: 100%; margin:0" /> </a> </div>
+  <h3 class="ui-bar ui-bar-a ui-corner-all" align="center">VERIFICATION FEEDBACK</h3>
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Unique reference number:</span>
+              <input name="textinput-5" readonly id="txReference" value="" data-mini="true" type="text" />
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Customer type:</span>
+              <input name="textinput-5" readonly id="txCustType" value="" data-mini="true" type="text" />
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Customer's full name:</span>
+              <input name="textinput-5" readonly id="txCustName" value="" data-mini="true" type="text" />
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Customer's address:</span>
+              <textarea cols="40" rows="4" readonly name="textarea-1" id="txCustAddress" data-mini="true"></textarea>
+        </div>
+        
+       <div data-role="controlgroup" class="ui-corner-all">
+            <fieldset data-role="controlgroup" data-mini="true">
+                <legend class="lbl">Address status:</legend>
+                <input type="radio" name="rdStatus" id="rdStatusYes" value="1" />
+                <label for="rdStatusYes">Address exists</label>
+    
+                <input type="radio" name="rdStatus" id="rdStatusNo" value="0"  />
+                <label for="rdStatusNo">Address does not exist</label>
+            </fieldset>
+       </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Nearest bus stop or landmark:</span>
+              <input type="text" name="textarea-1" id="txLandmark">
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="txVisitationDate">Visitation date/time:</span>
+              <input type="text" data-field="datetime" readonly id="txVisitationDate">
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Address visited:</span>
+              <textarea cols="40" rows="4" name="textarea-1" id="txAddressVisited"></textarea>
+        </div>
+       
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Description of address visited:</span>
+              <textarea cols="40" rows="4" name="textarea-1" id="txDescription"></textarea>
+        </div>
+        <br/>
+       <div data-role="controlgroup" class="ui-corner-all">
+        <fieldset data-role="controlgroup" data-mini="true">
+            <legend class="lbl">Are you convinced that customer resides at the above address?:</legend>
+                <input type="radio" name="rdAnswer" id="rdAnswerYes" value="1" />
+                <label for="rdAnswerYes">Yes</label>
+    
+                <input type="radio" name="rdAnswer" id="rdAnswerNo" value="0"  />
+                <label for="rdAnswerNo">No</label>
+        </fieldset>
+       </div>
+       
+       <div data-role="controlgroup" class="ui-corner-all">
+          <span class="lbl" for="textarea-1">Reasons for answer above:</span>
+           <select name="ddlReasons" id="ddlReasons" data-mini="true">
+                <option value="Select">Select</option>
+                <option>Incomplete information</option>
+                <option>Address exists and customer is known but does not reside in the premises</option>
+                <option>Address exists and customer is known </option>
+                <option>Address does not exist</option>
+                <option>Address exists but it is a residential and not a business address</option>
+                <option>The address is in an estate and security agents have refused entry</option>
+                <option>The customer does not live at the address given but visits often</option>
+                <option>The address is a plot of land belonging to the customer</option>
+                <option>The customer is deceased</option>
+                <option>The customer has relocated</option>
+                <option>The customer works in the stated address and does not reside there</option>
+                <option>Address exist but customer does not reside at the address</option>
+                <option>Address where the customer was met is different from the house number provided</option>
+                <option>Address is customer’s family house and does not reside there.</option>
+                <option>The address is a church/mosque address</option>
+           </select>
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all" id="dvPerson1">
+              <span class="lbl" for="textarea-1">Staff met on visitation:</span>
+              <input type="text" name="textarea-1" id="txPersonMet">
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all" id="dvPerson2">
+              <span class="lbl" for="textarea-1">Staff met comments:</span>
+              <textarea cols="40" rows="4" name="textarea-1" id="txPersonMetComments"></textarea>
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Further comments/observations:</span>
+              <textarea cols="40" rows="4" name="textarea-1" id="txFurther"></textarea>
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Coordinates (Longitude):</span>
+              <input type="text" readonly id="txLong">
+              <span style="display: none" id="lbLongitude"></span>
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Coordinates (Latitude):</span>
+              <input type="text" readonly id="txLat">
+              <span style="display: none" id="lbLatitude"></span>
+        </div>
+        
+        <!--<div data-role="controlgroup" class="ui-corner-all">
+              <input align="center" class="button" data-theme="a" name="submit" id="btGetImage" type="submit" value="Upload a picture" />
+        </div>-->
+        
+         <div data-role="controlgroup" class="ui-corner-all">
+         <span class="lbl" for="textarea-1">Select pictures:</span>
+         <table align="center">
+         <tr>
+         <td>         
+            <img style="width: 80px; height: 80px; text-align:center" src="img/no-image.png" id="smallImage1" />
+            <span id="imagename1"></span>
+         </td>
+         <td>
+         	<img style="width: 80px; height: 80px; text-align:center" src="img/no-image.png" id="smallImage2" />
+            <span id="imagename2"></span>
+         </td>
+         <!--<td>
+         	<img style="width: 80px; height: 80px; text-align:center" src="img/no-image.png" id="smallImage3" />
+            <span id="imagename3"></span>
+         </td>-->
+         </tr>
+         </table>
+        </div>
+                
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Visitation done by:</span>
+              <input name="textinput-5" readonly id="txAgentName" data-mini="true" type="text" />
+        </div>
+        <br/>
+        <input align="center" class="button" data-theme="a" name="submit" id="btSubmitFeedback" type="submit" value="Submit" />
+      </div>
+     <div data-role="footer" data-position="fixed"> 
+    <a href="#" id="btExit" data-icon="arrow-l" class="ui-btn-left" data-transition="flip" data-theme="a">Back</a> 
+    <h4>© Diamond Bank</h4>
+    </div>
+    </div>       
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+    <!-- Beginning of report page -->
+    <div data-role="page" data-theme="d" id="report" data-cache="never" data-dom-cache="false">
+      <div data-role="panel" data-theme="a" id="Menu" data-position="left" data-display="overlay" data-dismissible="true" data-animate="true">
+    <ul data-role="listview" data-inset="true">
+          <li data-role="list-divider">Menu</li>
+          <li><a href="#home" data-transition="flip">Home</a> </li>
+          <li><a href="#jobs" data-transition="flip">Pending Jobs</a> </li>
+          <li><a href="#report" data-transition="flip">Submitted Jobs</a></li>
+          <li><a href="#" id="lnkLogout" data-transition="flip">Logout</a> </li>
+        </ul>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav.png" style="width: 40%" /> </a> </div>
+  </div>
+      <!--------/////////DIVIDER///////////----->
+     <div data-role="header"> <a href="#Menu" data-icon="bars" data-iconpos="notext">Menu</a>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav_header1.png" style="width: 50%; margin:0" /> </a> </div>
+  </div>
+    
+      <div data-role="content" class="scrollable">
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/allpagepix.png" style="width: 100%; margin:0" /> </a> </div>
+  
+        <h3 class="ui-bar ui-bar-a ui-corner-all" align="center">LAST 50 SUBMITTED JOBS</h3>
+        <!--<br/>-->
+        <div data-role="tabs">
+              <ul data-role="listview" data-filter="false" data-inset="true" class="paging" id="reportList"></ul>
+        </div>
+      </div>
+    <div data-role="footer" data-position="fixed"> 
+    <a href="#" id="btExit" data-icon="arrow-l" class="ui-btn-left" data-transition="flip" data-theme="a">Back</a> 
+    <h4>© Diamond Bank</h4>
+    </div>
+    </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+     <!-- Beginning of password change page-->
+        <div data-role="page" data-theme="d" id="password-change" data-cache="never" data-dom-cache="false">  
+        <div data-role="header"> 
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav_header1.png" style="width: 50%; margin:0" /> </a> </div>
+    </div>  
+      <div data-role="content">
+    <div class="ui-body ui-body-d ui-corner-all" style="border:#fff" >
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/allpagepix.png" style="width: 100%; margin:0" /> </a> </div>
+  <h3 class="ui-bar ui-bar-a ui-corner-all" align="center">CHANGE PASSWORD</h3>
+  <br/>
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">User ID:</span>
+              <input name="textinput-5" id="txUserID" data-mini="true" type="text" />
+            </div>
+            
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Old/Current Password:</span>
+              <input name="textinput-5" id="txOldPassword" value="" data-mini="true" type="password" />
+            </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">New Password:</span>
+              <input name="textinput-5" id="txNewPassword" value="" data-mini="true" type="password" />
+            </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Confirm Password:</span>
+              <input name="textinput-5" id="txConfirmPassword" value="" data-mini="true" type="password" />
+        </div>
+              
+        <br/>
+        
+        <div align="center">
+        <input align="center" class="button" data-theme="a" name="submit" id="btResetPassword" type="submit" value="Submit" />
+        </div>
+      </div>
+    </div>
+    <div data-role="footer" data-position="fixed"> 
+    <a href="#" id="btExit" data-icon="arrow-l" class="ui-btn-left" data-transition="flip" data-theme="a">Back</a> 
+    <h4>© Diamond Bank</h4>
+    </div>
+    </div>      
+    
+    <!-- Beginning of password reset page-->
+        <div data-role="page" data-theme="d" id="password-reset" data-cache="never" data-dom-cache="false" data-add-back-btn="true">  
+        <div data-role="header"> <a href="#page-login" data-icon="home" data-iconpos="notext">Login</a>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav_header1.png" style="width: 50%; margin:0" /> </a> </div>
+    <a href="#" data-icon="plus" data-iconpos="notext">LogOut</a> 
+    </div>  
+      <div data-role="content">
+    <div class="ui-body ui-body-d ui-corner-all" style="border:#fff" >
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/allpagepix.png" style="width: 100%; margin:0" /> </a> </div>
+  <h3 class="ui-bar ui-bar-a ui-corner-all" align="center">RESET PASSWORD</h3>
+  <br/>
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Enter your User ID:</span>
+              <input name="textinput-5" id="txResetUserID" data-mini="true" type="text" />
+            </div>
+                          
+        <br/>
+        
+        <p style="text-align: center; margin-left:0 auto; margin-right:0 auto" class="clearboth">
+        <input align="center" class="button" data-theme="a" name="submit" id="btChangePassword" type="submit" value="Submit" />       
+      </div>
+    </div>
+    <div data-role="footer" data-position="fixed"> 
+    <a href="#" id="btExit" data-icon="arrow-l" class="ui-btn-left" data-transition="flip" data-theme="a">Back</a> 
+    <h4>© Diamond Bank</h4>
+    </div>
+    </div>   
+    
+    <!-- Beginning of report-details page-->
+        <div data-role="page" data-theme="d" id="details" data-cache="never" data-dom-cache="false">
+      <div data-role="panel" data-theme="a" id="Menu" data-position="left" data-display="overlay" data-dismissible="true" data-animate="true">
+    <ul data-role="listview" data-inset="true">
+          <li data-role="list-divider">Menu</li>
+          <li><a href="#home" data-transition="flip">Home</a> </li>
+          <li><a href="#jobs" data-transition="flip">Pending Jobs</a> </li>
+          <li><a href="#report" data-transition="flip">Submitted Jobs</a></li>
+          <li><a href="#" id="lnkLogout" data-transition="flip">Logout</a> </li>
+        </ul>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav.png" style="width: 40%" /> </a> </div>
+  </div>
+      <!--------/////////DIVIDER///////////----->
+     <div data-role="header"> <a href="#Menu" data-icon="bars" data-iconpos="notext">Menu</a>
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/cav_header1.png" style="width: 50%; margin:0" /> </a> </div>
+  </div>
+    
+      <div data-role="content" class="scrollable">
+    <div class="ui-grid-a" style="text-align: center;
+  margin-left:0 auto;
+  margin-right:0 auto"> <a> <img src="images/allpagepix.png" style="width: 100%; margin:0" /> </a> </div>
+  <h3 class="ui-bar ui-bar-a ui-corner-all" align="center">FEEDBACK REPORT</h3>
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Unique reference number:</span>
+              <input name="textinput-5" readonly id="txRptReference" value="" data-mini="true" type="text" />
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Customer type:</span>
+              <input name="textinput-5" readonly id="txRptCustType" value="" data-mini="true" type="text" />
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Customer's full name:</span>
+              <input name="textinput-5" readonly id="txRptCustName" value="" data-mini="true" type="text" />
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Processed stage:</span>
+              <input name="textinput-5" readonly id="txRptProcessedStage" value="" data-mini="true" type="text" />
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Customer's address:</span>
+              <textarea cols="40" rows="4" readonly name="textarea-1" id="txRptCustAddress" data-mini="true"></textarea>
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Address exists?:</span>
+              <input name="textinput-5" readonly id="txRptStatus" value="" data-mini="true" type="text" />
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Nearest bus stop or landmark:</span>
+              <input type="text" name="textarea-1" readonly id="txRptLandmark">
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="txVisitationDate">Visitation date/time:</span>
+              <input type="text" data-field="datetime" readonly id="txRptVisitationDate">
+        </div>
+       
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Description of address visited:</span>
+              <textarea cols="40" rows="4" readonly name="textarea-1" id="txRptDescription"></textarea>
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Are you convinced that customer resides at the above address?:</span>
+              <textarea cols="40" rows="4" readonly name="textarea-1" id="txRptAnswer"></textarea>
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Reasons for answer above:</span>
+              <textarea cols="40" rows="4" readonly name="textarea-1" id="txRptReasons"></textarea>
+        </div>
+                      
+        <div data-role="controlgroup" class="ui-corner-all" id="dvRptPerson1">
+              <span class="lbl" for="textarea-1">Staff met on visitation:</span>
+              <input type="text" name="textarea-1" readonly id="txRptPersonMet">
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all" id="dvRptPerson2">
+              <span class="lbl" for="textarea-1">Staff met comments:</span>
+              <textarea cols="40" rows="4" name="textarea-1" readonly id="txRptPersonMetComments"></textarea>
+        </div>
+        
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textarea-1">Further comments/observations:</span>
+              <textarea cols="40" rows="4" name="textarea-1" readonly id="txRptFurther"></textarea>
+        </div>
+                
+        <div data-role="controlgroup" class="ui-corner-all">
+              <span class="lbl" for="textinput-5">Visitation done by:</span>
+              <input name="textinput-5" readonly id="txRptAgentName" data-mini="true" type="text" />
+        </div>
+      </div>
+     <div data-role="footer" data-position="fixed"> 
+    <a href="#" id="btExit" data-icon="arrow-l" class="ui-btn-left" data-transition="flip" data-theme="a">Back</a> 
+    <h4>© Diamond Bank</h4>
+    </div>
+    </div>          
+    
+</div></body>
+</html>
